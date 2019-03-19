@@ -1,0 +1,14 @@
+digraph "MainWindow"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node5 [label="MainWindow",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node6 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="QMainWindow",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node7 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="Pencil",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classPencil.html"];
+  Node8 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="Production",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classProduction.html"];
+  Node9 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="Wallet",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classWallet.html"];
+}

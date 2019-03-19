@@ -1,0 +1,23 @@
+\hypertarget{pencil_8h}{}\section{pencil.\+h File Reference}
+\label{pencil_8h}\index{pencil.\+h@{pencil.\+h}}
+
+
+this header file contains the functionalities for buying and selling pencil and the Auto \hyperlink{classPencil}{Pencil} Machine (A\+PM).  
+
+
+{\ttfamily \#include \char`\"{}production.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}wallet.\+h\char`\"{}}\newline
+Include dependency graph for pencil.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classPencil}{Pencil}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+this header file contains the functionalities for buying and selling pencil and the Auto \hyperlink{classPencil}{Pencil} Machine (A\+PM). 
+

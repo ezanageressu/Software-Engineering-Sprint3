@@ -1,0 +1,98 @@
+\hypertarget{classMainWindow}{}\section{Main\+Window Class Reference}
+\label{classMainWindow}\index{Main\+Window@{Main\+Window}}
+
+
+Inheritance diagram for Main\+Window\+:
+% FIG 0
+
+
+Collaboration diagram for Main\+Window\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMainWindow_a996c5a2b6f77944776856f08ec30858d}{Main\+Window} (Q\+Widget $\ast$parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Mainwindow constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMainWindow_a01b6ff5f83460855e5125c0a77a4018d}\label{classMainWindow_a01b6ff5f83460855e5125c0a77a4018d}} 
+void {\bfseries on\+\_\+make\+Pencil\+\_\+clicked} ()
+\item 
+\mbox{\Hypertarget{classMainWindow_ae82d6db3dd5e52b5e5038b5356fd5ff9}\label{classMainWindow_ae82d6db3dd5e52b5e5038b5356fd5ff9}} 
+void \hyperlink{classMainWindow_ae82d6db3dd5e52b5e5038b5356fd5ff9}{runner} ()
+\begin{DoxyCompactList}\small\item\em Function that updates ui labels every second. \end{DoxyCompactList}\item 
+void \hyperlink{classMainWindow_a4dc23fc3239af6ef699297e092f833cd}{seller} ()
+\item 
+\mbox{\Hypertarget{classMainWindow_af88e0bdbc0edab9e04408b3b07419add}\label{classMainWindow_af88e0bdbc0edab9e04408b3b07419add}} 
+void {\bfseries apm2\+Seller} ()
+\item 
+\mbox{\Hypertarget{classMainWindow_abbb5a286404d3bf211caa780c5a8a89e}\label{classMainWindow_abbb5a286404d3bf211caa780c5a8a89e}} 
+void \hyperlink{classMainWindow_abbb5a286404d3bf211caa780c5a8a89e}{calculate\+Prices} ()
+\begin{DoxyCompactList}\small\item\em Function to calculate prices of graphite and wood every 5 second. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classMainWindow_ac1ccd307bacd96f814bc13e5c9307937}\label{classMainWindow_ac1ccd307bacd96f814bc13e5c9307937}} 
+void {\bfseries on\+\_\+buy\+Wood\+\_\+clicked} ()
+\item 
+\mbox{\Hypertarget{classMainWindow_a60acb5ba769483317adf8a1ad8c9af27}\label{classMainWindow_a60acb5ba769483317adf8a1ad8c9af27}} 
+void {\bfseries on\+\_\+buy\+Graphite\+\_\+clicked} ()
+\item 
+\mbox{\Hypertarget{classMainWindow_acf4255896c256da2f20bf64dfc8eb38e}\label{classMainWindow_acf4255896c256da2f20bf64dfc8eb38e}} 
+void {\bfseries on\+\_\+buy\+Apm\+\_\+clicked} ()
+\item 
+void \hyperlink{classMainWindow_a8d78bab624841d0cab89e03c7c3c1a61}{checkbuttons} ()
+\begin{DoxyCompactList}\small\item\em Function to check which buttons need to be disabled. $\ast$/. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classMainWindow_afce8692f1f157355e429ffae9ea94f38}\label{classMainWindow_afce8692f1f157355e429ffae9ea94f38}} 
+void {\bfseries on\+\_\+increase\+Pencil\+\_\+clicked} ()
+\item 
+\mbox{\Hypertarget{classMainWindow_a5e1710322c48fb39fd18109e4d8df1a0}\label{classMainWindow_a5e1710322c48fb39fd18109e4d8df1a0}} 
+void {\bfseries on\+\_\+decrease\+Pencil\+\_\+clicked} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMainWindow_a35466a70ed47252a0191168126a352a5}\label{classMainWindow_a35466a70ed47252a0191168126a352a5}} 
+Ui\+::\+Main\+Window $\ast$ {\bfseries ui}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classMainWindow_a996c5a2b6f77944776856f08ec30858d}\label{classMainWindow_a996c5a2b6f77944776856f08ec30858d}} 
+\index{Main\+Window@{Main\+Window}!Main\+Window@{Main\+Window}}
+\index{Main\+Window@{Main\+Window}!Main\+Window@{Main\+Window}}
+\subsubsection{\texorpdfstring{Main\+Window()}{MainWindow()}}
+{\footnotesize\ttfamily Main\+Window\+::\+Main\+Window (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Mainwindow constructor. 
+
+Label is set to display as soon as the \hyperlink{classMainWindow}{Main\+Window} class is constructed
+
+Timer initialization
+
+This timer is used for calculating prices of graphite and wood every 5 sec. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classMainWindow_a8d78bab624841d0cab89e03c7c3c1a61}\label{classMainWindow_a8d78bab624841d0cab89e03c7c3c1a61}} 
+\index{Main\+Window@{Main\+Window}!checkbuttons@{checkbuttons}}
+\index{checkbuttons@{checkbuttons}!Main\+Window@{Main\+Window}}
+\subsubsection{\texorpdfstring{checkbuttons}{checkbuttons}}
+{\footnotesize\ttfamily void Main\+Window\+::checkbuttons (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Function to check which buttons need to be disabled. $\ast$/. 
+
+Prevent the user from setting the price lower than 0 \mbox{\Hypertarget{classMainWindow_a4dc23fc3239af6ef699297e092f833cd}\label{classMainWindow_a4dc23fc3239af6ef699297e092f833cd}} 
+\index{Main\+Window@{Main\+Window}!seller@{seller}}
+\index{seller@{seller}!Main\+Window@{Main\+Window}}
+\subsubsection{\texorpdfstring{seller}{seller}}
+{\footnotesize\ttfamily void Main\+Window\+::seller (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+Function to sell pencils continuously every second 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+mainwindow.\+h\item 
+mainwindow.\+cpp\end{DoxyCompactItemize}

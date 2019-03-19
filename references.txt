@@ -1,0 +1,20 @@
+{
+    "online-references": 
+    [
+        {
+            "url": "https://github.com/google/googletest/blob/master/googlemock/docs/CheatSheet.md",
+            "contribution": "Google Test Documentation",
+            "file": "tests.cpp & CMakeLists.txt"
+        },
+        {
+            "url": "https://www.ibm.com/developerworks/aix/library/au-googletestingframework.html",
+            "contribution": "Google Test Walktrhough",
+            "file": "tests.cpp & CMakeLists.txt"
+        },
+        {
+            "url": "https://doc.qt.io/qt-5/qtimer.html",
+            "contribution": "Timer function in QT",
+            "file": "mainwindow.cpp & .h"
+        }
+    ]
+}
