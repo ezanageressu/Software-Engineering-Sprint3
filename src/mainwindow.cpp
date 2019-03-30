@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <QTimer>
 #include <QString>
 
@@ -7,6 +7,8 @@
 #include "pencil.h"
 #include "production.h"
 #include "wallet.h"
+#include "intelligence.h"
+#include "intelligence.cpp"
 
 /* Start: Initialization */
 
@@ -17,8 +19,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     /// Label is set to display as soon as the MainWindow class is constructed
     ui->setupUi(this);
+    disableComponents();
+
     /// Timer initialization
     QTimer *timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(intelligenceRunner()));
     connect(timer, SIGNAL(timeout()), this, SLOT(runner()));
     connect(timer, SIGNAL(timeout()), this, SLOT(seller()));
     connect(timer, SIGNAL(timeout()), this, SLOT(apm2Seller()));
@@ -53,7 +58,11 @@ void MainWindow::runner()
     ui->wood->setText(QString::number(Production::numberofWood));
     ui->graphite->setText(QString::number(Production::numberofGraphite));
     ui->priceofWood->setText("$ " + QString::number( Production::priceofWood));
+    ui->priceofWood->setAlignment(Qt::AlignCenter);
     ui->priceofGraphite->setText("$ "+QString::number(Production::priceofGraphite));
+    ui->priceofGraphite->setAlignment(Qt::AlignCenter);
+    ui->priceofApmUpgrade->setText(QString::number(Pencil::apmUpgradePrice) + " IQ");
+    ui->priceofApmUpgrade->setAlignment(Qt::AlignCenter);
 
     ui->wallet->setText("$ " + QString::number(Wallet::balance));
 
@@ -61,17 +70,66 @@ void MainWindow::runner()
     ui->publicDemand->setText(QString::number(Pencil::rateofPencil));
     ui->numberofApm->setText(QString::number(Pencil::numberofApm));
     ui->priceofApm->setText("$ " + QString::number(Pencil::priceofApm));
-    ui->rateofApm->setText(QString::number(Pencil::rateofApm) + " pencils/min");
+    ui->priceofApm->setAlignment(Qt::AlignCenter);
+    ui->rateofApm->setText(QString::number(Pencil::rateofApm) + " pencils/sec");
     ui->totalinventory->setText(QString::number(Pencil::totalnumberofPencil));
+    ui->intelligence->setText(QString::number(Intelligence::intelligenceBalance));
+    ui->marketingLevel->setText(QString::number(Pencil::marketing));
+    ui->pricetoUnlockMarketing->setText(QString::number(100) + " IQ");
+    ui->pricetoUnlockMarketing->setAlignment(Qt::AlignCenter);
+    ui->priceofMarketingUpgrade->setText("$ "+QString::number(Pencil::marketingUpgradePrice));
+    ui->priceofMarketingUpgrade->setAlignment(Qt::AlignCenter);
 
     QTimer *timer = new QTimer(this);
     timer->start();
     checkbuttons();
 }
 
+void MainWindow::intelligenceRunner(){
+    if(!Intelligence::intelligenceIsActive){
+        if(Pencil::activateIntelligence()){
+            ui->intelligence->setVisible(true);
+            ui->intelligenceLabel->setVisible(true);
+            ui->upgradeApm->setVisible(true);
+            ui->priceofApmUpgrade->setVisible(true);
+            ui->unlockMarketing->setVisible(true);
+            ui->pricetoUnlockMarketing->setVisible(true);
+            return;
+        }
+        else{
+            return;
+        }
+    }
+    Intelligence::increaseIntelligence();
+}
+
 //! Function to check which buttons need to be disabled. */
 /* setEnabled(0) = disable button, setEnabled(1) = enable button */
 void MainWindow::checkbuttons(){
+    if(Intelligence::intelligenceIsActive){
+        if (apmCheck()){
+            ui->upgradeApm->setEnabled(1);
+        }
+        else{
+            ui->upgradeApm->setEnabled(0);
+        }
+
+        if (!ui->upgradeMarketing->isVisible() &&
+                Intelligence::intelligenceBalance>=100){
+            ui->unlockMarketing->setEnabled(1);
+        }
+        else{
+            ui->unlockMarketing->setEnabled(0);
+        }
+
+        if(ui->upgradeMarketing->isVisible() &&
+                Wallet::balance>=Pencil::marketingUpgradePrice){
+            ui->upgradeMarketing->setEnabled(1);
+        }
+        else{
+            ui->upgradeMarketing->setEnabled(0);
+        }
+    }
 
   if (Wallet::balance < Production::priceofGraphite){
     ui->buyGraphite->setEnabled(0);
@@ -153,4 +211,65 @@ void MainWindow::on_buyApm_clicked(){
   checkbuttons();
 }
 
+void MainWindow::on_upgradeApm_clicked(){
+    Pencil::upgradeApm();
+    ui->upgradeApm->setVisible(false);
+    ui->priceofApmUpgrade->setVisible(false);
+    checkbuttons();
+}
+
+
+void MainWindow::on_unlockMarketing_clicked()
+{
+    ui->unlockMarketing->setVisible(false);
+    ui->pricetoUnlockMarketing->setVisible(false);
+    ui->marketingLabel->setVisible(true);
+    ui->marketingLevel->setVisible(true);
+    ui->upgradeMarketing->setVisible(true);
+    ui->priceofMarketingUpgrade->setVisible(true);
+}
+
+void MainWindow::on_upgradeMarketing_clicked()
+{
+    Pencil::upgradeMarketing();
+}
+
 /* End: Buttons and their functionalities */
+
+bool MainWindow::apmCheck(){
+    if(ui->upgradeApm->isVisible()){
+        if(Intelligence::intelligenceBalance>=Pencil::apmUpgradePrice){
+            return true;
+        }
+        return false;
+    }
+
+    else if(Pencil::totalnumberofPencil>=Pencil::pencilsForUpgrade){
+        ui->upgradeApm->setVisible(true);
+        ui->priceofApmUpgrade->setVisible(true);
+        return apmCheck();
+    }
+    else{
+        return false;
+    }
+}
+
+bool MainWindow::marketingCheck(){
+    if(!ui->upgradeMarketing->isVisible()){
+        return true;
+    }
+    return false;
+}
+
+void MainWindow::disableComponents(){
+    ui->intelligence->setVisible(false);
+    ui->intelligenceLabel->setVisible(false);
+    ui->upgradeApm->setVisible(false);
+    ui->priceofApmUpgrade->setVisible(false);
+    ui->unlockMarketing->setVisible(false);
+    ui->pricetoUnlockMarketing->setVisible(false);
+    ui->upgradeMarketing->setVisible(false);
+    ui->priceofMarketingUpgrade->setVisible(false);
+    ui->marketingLabel->setVisible(false);
+    ui->marketingLevel->setVisible(false);
+}

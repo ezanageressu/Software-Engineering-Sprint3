@@ -5,6 +5,7 @@
 #include "pencil.h"
 #include "production.h"
 #include "wallet.h"
+#include "intelligence.h"
 
 /**
  * \brief Getting MainWondow class from Ui namespace
@@ -33,19 +34,24 @@ private slots:
     void runner();
     void seller();
     void apm2Seller();
+    void intelligenceRunner();
     void calculatePrices();
+    void checkbuttons();
+    bool apmCheck();
+    bool marketingCheck();
+    void disableComponents();
+
     void on_buyWood_clicked();
     void on_buyGraphite_clicked();
     void on_buyApm_clicked();
-
-    void checkbuttons();
-
     void on_increasePencil_clicked();
     void on_decreasePencil_clicked();
+    void on_upgradeApm_clicked();
+    void on_unlockMarketing_clicked();
+    void on_upgradeMarketing_clicked();
 
 private:
     Ui::MainWindow *ui;
-
 };
 
 #endif // MAINWINDOW_H
