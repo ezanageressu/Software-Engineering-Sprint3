@@ -1,6 +1,6 @@
 #include <cmath>
 #include <cstdio>
-#include <stdio.h>
+#include <iostream>
 #include "pencil.h"
 #include "production.h"
 #include "wallet.h"
@@ -12,10 +12,16 @@ Pencil::Pencil()
     this->priceofPencil = 1.00;
     this->rateofPencil = 1;
     this->totalnumberofPencil = 0;
+    this->pencilsForUpgrade = 3000;
 
     this->numberofApm = 1;
     this->priceofApm = 150;
-    this->rateofApm = 120; ///Rate of apm is only used as a label for the ui
+    this->rateofApm = 2;
+    this->apmUpgradePrice = 50;
+    this->apmFractional = 0;
+
+    this->marketing = 0;
+    this->marketingUpgradePrice = 500;
 }
 
 void Pencil::producePencil(){
@@ -51,7 +57,7 @@ double Pencil::round(double var)
 
 /*! Function to calculate rate of a pencil every 0.20 seconds */
 void Pencil::newRate(){
-    this->rateofPencil = round((1 / this->priceofPencil));
+    this->rateofPencil = round((1 / this->priceofPencil)*pow(1.1, this->marketing));
 }
 
 /*! Sell pencils (according to rate) every second   */
@@ -76,11 +82,18 @@ void Pencil::sell(){
 
 }
 
-/*! Function to produced two pencils each second for every APM */
+/*! Function to produce pencils for the APM */
 void Pencil::apm2000(){
+    double apmInteger;
+    modf(rateofApm, &apmInteger);
   for (int i = 0; i < numberofApm; i++){
-    producePencil();
-    producePencil();
+      for(int j = 0; j < int(apmInteger + apmFractional);j++){
+          producePencil();
+      }
+      if(apmFractional>1){
+          apmFractional-=1;
+      }
+      apmFractional += modf(rateofApm, &apmInteger);
   }
 }
 
@@ -93,6 +106,28 @@ void Pencil::buyApm(){
       Wallet::balance -= this->priceofApm;
 
       this->priceofApm = this->priceofApm + (0.10 * this->priceofApm);
-      this->rateofApm += this->rateofApm;
+      //this->rateofApm += this->rateofApm;
   }
 }
+
+void Pencil::upgradeApm(){
+    Pencil::rateofApm += (Pencil::rateofApm/10);
+    Intelligence::intelligenceBalance -= this->apmUpgradePrice;
+    this->apmUpgradePrice = 200;
+    this->pencilsForUpgrade = 5000;
+}
+
+bool Pencil::activateIntelligence(){
+    if(this->totalnumberofPencil>=this->pencilsForUpgrade){
+        Intelligence::intelligenceIsActive = 1;
+    }
+    return Intelligence::intelligenceIsActive;
+}
+
+void Pencil::upgradeMarketing(){
+    Pencil::marketing += 1;
+    Pencil::newRate();
+    Wallet::balance -= Pencil::marketingUpgradePrice;
+    Pencil::marketingUpgradePrice *= 1.1;
+}
+

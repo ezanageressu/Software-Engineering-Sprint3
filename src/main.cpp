@@ -8,6 +8,8 @@
 #include "production.cpp"
 #include "wallet.h"
 #include "wallet.cpp"
+#include "intelligence.h"
+//#include "intelligence.cpp"
 
 int main(int argc, char *argv[])
 {
